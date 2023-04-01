@@ -5,7 +5,7 @@ import tkinter.filedialog
 import os
 from PIL import Image, ImageTk
 from adamAsmaca import *
-from gameSettings import gameSet, ImStates, openPic
+from gameSettings import gameSet, ImStates, openPic, my_about
 
 class Menu(ttk.Frame):
 
@@ -28,24 +28,45 @@ class Menu(ttk.Frame):
         startButton = ttk.Button(self, width = 20, text="oyun gir", command=lambda: self.change_frame('gameScreen'))
         startButton.pack(anchor='center', **self.options)
 
-        settingsButton = ttk.Button(self, width = 20, text="ayarlar", command=lambda: self.change_frame('settingsScreen'))
-        settingsButton.pack(anchor='center', **self.options)
+        self.settingsButton = ttk.Button(self, width = 20, text="ayarlar", command=self.SetDialog)
+        self.settingsButton.pack(anchor='center', **self.options)
 
         wordListButton = ttk.Button(self, width=20, text='kelime listesi ekle', command=self.addWordList)
         wordListButton.pack(anchor='center', **self.options)
 
-        aboutTextButton = ttk.Button(self, width=20, text='Hakkımda', command=...)
+        aboutTextButton = ttk.Button(self, width=20, text='Hakkımda', command=self.About)
         aboutTextButton.pack(anchor='center', **self.options)
 
         extButton = ttk.Button(self, width=20, text='çıkış', command=self.destroy)
         extButton.pack(anchor='center', **self.options)
 
     
+    def SetDialog(self):
+        self.win = tk.Toplevel(self)
+        self.win.grab_set()
+        self.win.geometry('450x300')
+        Label = ttk.Label(self.win, text="ayarları bozmak tehlikelidir setting dosyasının yedeğini alın")
+        Label.pack()
+
+        labels = [i for i in gameSet.keys()]
+        for i in labels:
+            Label = ttk.Label(self.win, text=i+': '+gameSet[i])
+            Label.pack()
+    
+    def About(self):
+        self.win = tk.Toplevel(self)
+        self.win.grab_set()
+        self.win.geometry('500x800')
+
+        lbl = ttk.Label(self.win, text=my_about)
+        lbl.pack(fill='both', expand=True)
+    
+    def setCh(self):
+        print(self.entry.get())
+
     def change_frame(self, name):
 
-        self.frames = {'gameScreen' : GameScreen(self.container, self.options, self.texts),
-                        'settingsScreen' : SetScreen(self.container, self.options, self.texts)
-        }
+        self.frames = {'gameScreen' : GameScreen(self.container, self.options, self.texts)}
 
         frame = self.frames[name]
         frame.setWordList(self.allWords)
@@ -75,7 +96,6 @@ class GameScreen(ttk.Frame):
         self.warning_rights = gameSet['warning_rights'] #3
         self.rest_chars = ""
         self.used_chars = ""
-
         self.startGame()
 
     def setWordList(self,wrdlist):
@@ -100,8 +120,12 @@ class GameScreen(ttk.Frame):
         self.charPred = ttk.Entry(self, textvariable=self.temp_txt)
         self.charPred.grid(row=2, column=1, **self.options)
 
+
+        self.styleB = ttk.Style(self)
         self.confirmButton = ttk.Button(self, text="onayla", command=self.takePredict)
+        #self.confirmButton.bind('<Return>',self.takePredict)
         self.confirmButton.grid(row=3, column=1, **self.options)
+        
 
         self.restRight = ttk.Label(self, text='kalan haklar', background='green')
         self.restRight.grid(row=0, column=4, **self.options)
@@ -123,7 +147,7 @@ class GameScreen(ttk.Frame):
 
         self.gameStarted()
 
-    
+
     def takePredict(self):
 
         if int(self.warning_rights) == 0:
@@ -166,7 +190,8 @@ class GameScreen(ttk.Frame):
     def gameStarted(self):
 
         if self.WordList is None:
-            self.WordList = load_words()
+            #self.WordList = load_words()
+            self.WordList = ["bedir"]
         
         self.screet_word = choose_word(self.WordList)
         self.rest_chars = get_available_letters(self.used_chars)
@@ -193,13 +218,15 @@ class GameScreen(ttk.Frame):
         self.usedChars['text'] = "kullanılan harfler: "+self.set_Values(self.used_chars)
         self.showWord['text'] = get_guessed_word(self.screet_word, self.used_chars)
         self.point['text'] = "puanın: "+str(point_calculate(self.screet_word, self.rights))
-    
+
+
     def isWin(self):
+        
         length = 0
         for i in str(get_guessed_word(self.screet_word, self.used_chars)):
             if i != ' _ ':
                 length += 1
-        
+ 
         if length == len(self.screet_word) :
             showinfo("sistem", "Tebrikler! kazandın puanın: "+
                     str(point_calculate(self.screet_word, self.rights))
@@ -210,7 +237,9 @@ class GameScreen(ttk.Frame):
                         str(point_calculate(self.screet_word, self.rights))
                         +"\ngizli kelime: "+self.screet_word)
 
+
             self.change_frame()
+
 
 #|----------------------------------------------------------------------------------------------
 

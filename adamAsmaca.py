@@ -217,7 +217,7 @@ if __name__ == "__main__":
     secret_word = choose_word(wordlist)
     adamAsmaca(secret_word)
 
-    
+
 ###############
     
 # 3. bölümü test etmek için yukarıdaki satırlarlarda yeniden # işaretini kullanın ve aşağıdaki iki satırda # işaretini silin
