@@ -46,5 +46,5 @@ Bedir tuğra Karaabalı
 ## Yazarlar ve Teşekkür
 
 - [@bdrtr](https://github.com/bdrtr) tasarım ve geliştirme için.
-
+- [@performans](http://127.0.0.1:8080/snakeviz/%2Fhome%2Fbedir%2FDocuments%2FvsCode%2Fpython3%2Fhangman%2FProfile.prof)
   
