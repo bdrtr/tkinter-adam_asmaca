@@ -1,7 +1,7 @@
 
 # Adam asmaca
 
-Bu proje adam asmaca oyunun bir görsel arayüz ile tasarlanmasıdır.
+Projem adam asmaca oyunun bir görsel arayüz ile tasarlanmasıdır.
 
 Linux sistemler için uygundur.
 Açık kaynak kodludur.

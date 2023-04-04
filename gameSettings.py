@@ -22,10 +22,6 @@ with open(current_dir+"/README.md") as fl:
         my_about += experision
         experision = fl.readline()
 
-for i in range(1,6):
-    img = Image.open(current_dir+f"/pictures/state{i}.png")
-    ImStates[f"state{i}"] = img
-
 @staticmethod
 def openPic(name, size=(300,300)):
         return (ImageTk.PhotoImage(Image.open(current_dir+"/pictures/"+name),size=(size)),size)

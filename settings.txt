@@ -1,10 +1,11 @@
 title = adam asmaca
-geometry = 1200x600
+geometry = 900x600
 resizableX = 0
 resizableY = 0
-sizeX = 1200
+sizeX = 900
 sizeY = 600
 rights = 6
 wrong_vowels = 2
 wrong_chars = 1
 warning_rights = 3
+geometry_settings = 450x300
