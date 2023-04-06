@@ -1,7 +1,7 @@
 # Problem Seti 2, adamAsmaca.py
-# İsim:
-# Ortak çalışanlar:
-# Harcanan zaman:
+# İsim:Bedir tuğra Karaabalı    
+# Ortak çalışanlar:-
+# Harcanan zaman:3 gün
 
 # Adam Asmaca Oyunu
 #------------------------------------
@@ -9,11 +9,13 @@
 # Bu yardımcı kodu anlamanıza gerek yok,
 # ama fonksiyonları nasıl kullanacağını bilmeniz gerekecek
 # (dökümanları okuduğunuzdan emin olun!)
+import pyximport
+pyximport.install()
+
 import random
 import string, os
 
 WORDLIST_FILENAME = os.path.dirname(__file__)+"/kelimeler.txt"
-
 
 def point_calculate(secret_word, rights):
     if int(rights)<0:
@@ -90,7 +92,6 @@ def get_guessed_word(secret_word, letters_guessed):
             char+=' _ '
 
     return char
-
 
 
 def get_available_letters(letters_guessed):

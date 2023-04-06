@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter.messagebox import showinfo, showerror
 import tkinter.filedialog
-import os
+import os, sys
 from PIL import Image, ImageTk
 from adamAsmaca import *
 from gameSettings import gameSet, ImStates, openPic, my_about
@@ -43,7 +43,7 @@ class Menu(ttk.Frame):
         aboutTextButton = ttk.Button(self, width=20, text='Hakkımda', command=self.About)
         aboutTextButton.pack(anchor='center', **self.options)
 
-        extButton = ttk.Button(self, width=20, text='çıkış', command=self.destroy)
+        extButton = ttk.Button(self, width=20, text='çıkış', command=sys.exit)
         extButton.pack(anchor='center', **self.options)
 
     
@@ -252,6 +252,7 @@ class GameScreen(ttk.Frame):
             showinfo("sistem", "Tebrikler! kazandın puanın: "+
                     str(point_calculate(self.screet_word, self.rights))
                     +"\ngizli kelime "+self.screet_word)
+            self.change_frame()
         
         if int(self.rights) <= 0:
             showinfo("sistem", "oyunu kaybettiniz puanınız :"+
